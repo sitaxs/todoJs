@@ -5,9 +5,9 @@ const step = 10;
 let begggingNumberList = 0;
 
 const allDeleteTodo = [];
-const all=0;
-
+const all =[];
 let state = "all";
+const allMain=[];
 
 fetch(`${httpTodo}todos`)
   .then((data) => data.json())
