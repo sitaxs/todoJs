@@ -10,6 +10,7 @@ let state = "all";
 
 async function fetchInfotmation() {
   try {
+    console.log("Hello")
     const response = await axios.get(`${httpTodo}todos`);
     allTodo = response.data;
     console.log(allTodo)
