@@ -1,3 +1,4 @@
+import axios from "axios";
 const httpTodo = "https://jsonplaceholder.typicode.com/";
 let allTodo = [];
 let mainListTodo = [];
@@ -5,22 +6,17 @@ const step = 10;
 let begggingNumberList = 0;
 
 const allDeleteTodo = [];
-const all =[];
 let state = "all";
-const allMain=[];
 
-fetch(`${httpTodo}todos`)
-  .then((data) => data.json())
-  .then((data) => {
-    allTodo = data;
-    mainListTodo = allTodo;
-    ulTodo.innerText = "";
-    showNextList();
-    console.log(allTodo);
-  })
-  .catch((error) => {
-    console.log("Error");
-  });
+async function fetchInfotmation() {
+  try {
+    const response = await axios.get(`${httpTodo}todos`);
+    allTodo = response.data;
+    console.log(allTodo)
+  } catch {}
+
+  // 
+}
 
 //   //////////////////////////////////////////////////
 const divTodo = document.getElementById("todo");
@@ -159,27 +155,25 @@ function showDoneInProcess(state) {
 
 const btnSeeTodo = document.getElementById("btnSeeTodo");
 btnSeeTodo.addEventListener("click", function () {
-  ulTodo.innerText = ""; // Очищаємо список
-  currentMode = "all"; // Режим "Всі"
-  begggingNumberList = 0; // Скидаємо лічильник
-
-  showNextList(); // Запускаємо показ з нуля
+  // ulTodo.innerText = ""; // Очищаємо список
+  // currentMode = "all"; // Режим "Всі"
+  // begggingNumberList = 0; // Скидаємо лічильник
+fetchInfotmation()
+  // showNextList(); // Запускаємо показ з нуля
 });
 
 // ///////////////////////////
 
 const btnDelete = document.getElementById("btnDelete");
-btnDelete.addEventListener("click", function(){
-    ulTodo.innerText="";
-    mainListTodo=allDeleteTodo;
-    begggingNumberList=0;
-    if (mainListTodo.length === 0) {
-      ulTodo.innerText = "Кошик пустий";
-      btnMore.style.display = "none";
+btnDelete.addEventListener("click", function () {
+  ulTodo.innerText = "";
+  mainListTodo = allDeleteTodo;
+  begggingNumberList = 0;
+  if (mainListTodo.length === 0) {
+    ulTodo.innerText = "Кошик пустий";
+    btnMore.style.display = "none";
   } else {
-      // 5. Малюємо
-      showNextList();
+    // 5. Малюємо
+    showNextList();
   }
-    
-})
-
+});
