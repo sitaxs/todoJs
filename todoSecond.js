@@ -5,6 +5,7 @@ const step = 10;
 let begggingNumberList = 0;
 
 const allDeleteTodo = [];
+const all=0;
 
 let state = "all";
 
