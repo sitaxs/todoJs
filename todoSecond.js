@@ -1,4 +1,5 @@
-import axios from "axios";
+//  Import axios for det information instead of fetch
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.6.7/+esm';
 const httpTodo = "https://jsonplaceholder.typicode.com/";
 let allTodo = [];
 let mainListTodo = [];
@@ -10,14 +11,17 @@ let state = "all";
 
 async function fetchInfotmation() {
   try {
-    console.log("Hello")
     const response = await axios.get(`${httpTodo}todos`);
-    allTodo = response.data;
-    console.log(allTodo)
-  } catch {}
-
-  // 
+    // Show 20 items
+    allTodo = response.data.slice(0, 20);
+    console.log(allTodo);
+    showNextList();
+  } catch(error) {
+    console.log(error)
+  }
 }
+
+// add error when you get infor 
 
 //   //////////////////////////////////////////////////
 const divTodo = document.getElementById("todo");
@@ -156,6 +160,7 @@ function showDoneInProcess(state) {
 
 const btnSeeTodo = document.getElementById("btnSeeTodo");
 btnSeeTodo.addEventListener("click", function () {
+  console.log("Hello in b tn")
   // ulTodo.innerText = ""; // Очищаємо список
   // currentMode = "all"; // Режим "Всі"
   // begggingNumberList = 0; // Скидаємо лічильник
